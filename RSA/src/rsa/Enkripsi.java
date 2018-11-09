@@ -5,6 +5,8 @@
  */
 package rsa;
 
+import java.util.Random;
+
 /**
  *
  * @author ivenacindy
@@ -21,12 +23,33 @@ public class Enkripsi {
         return ((p-1)*(q-1));
     }
     
+    private static boolean isPrime(int inputNum){
+        if (inputNum <= 3 || inputNum % 2 == 0) 
+            return inputNum == 2 || inputNum == 3; //this returns false if number is <=1 & true if number = 2 or 3
+        int divisor = 3;
+        while ((divisor <= Math.sqrt(inputNum)) && (inputNum % divisor != 0)) 
+            divisor += 2; //iterates through all possible divisors
+        return inputNum % divisor != 0; //returns true/false
+    }
+
+    
     int getE(int O){
-        e = 0;
-        int i=0;
-        for(i=2;i<O;i++){
-            if(i)
+        e =1;
+        Random rand = new Random(); // generate a random number
+        while(O % e == 0){
+            do {
+                e = rand.nextInt(O) - 1;
+                System.out.println(e);
+            }while(!isPrime(e));
         }
         return e;
+    }
+    
+    public static void main(String[] args) {
+        Enkripsi n = new Enkripsi();
+        int h =n.getO(7, 11);
+        System.out.println("iniO"+h);
+        int j= n.getE(h);
+        System.out.println("ini E"+j);
     }
 }
