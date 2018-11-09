@@ -45,11 +45,39 @@ public class Enkripsi {
         return e;
     }
     
+    int getD(int O, int E){
+        int x, i=0;
+        do{
+            i++;
+            x = 1+(i*O);
+        }while(x%E!=0);
+        d=x/E;
+        return d;
+    }
+    
+    public String getEncrypt(String plain, int E, int N){
+        String enkrip;
+        char[] en = plain.toCharArray();
+        for(int i=0; i<en.length;i++){
+            en[i] = (char) (Math.pow(en[i], E)%N);
+        }
+        enkrip = String.valueOf(en);
+        return enkrip;
+    }
+    
     public static void main(String[] args) {
         Enkripsi n = new Enkripsi();
         int h =n.getO(7, 11);
         System.out.println("iniO"+h);
         int j= n.getE(h);
         System.out.println("ini E"+j);
+        int dodol = n.getD(h, j);
+        System.out.println("iniD" + dodol);
+        String hm= n.getEncrypt("ivena", j, n.getN(7, 11));
+        System.out.println("ini enn "+hm);
+        
+        Dekripsi m = new Dekripsi();
+        String hmm = m.getDecrypt(hm, dodol, m.getN(7, 11));
+        System.out.println("ini decc "+hmm);
     }
 }

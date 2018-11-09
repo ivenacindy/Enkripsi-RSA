@@ -10,5 +10,20 @@ package rsa;
  * @author ivenacindy
  */
 public class Dekripsi {
+    private int p,q,d;
+    int N;
     
+    int getN(int p, int q){
+        return p*q;
+    }
+    
+    public String getDecrypt(String enkrip, int d, int N){
+        String dekrip;
+        char[] dec = enkrip.toCharArray();
+        for(int i=0; i<dec.length; i++){
+            dec[i] = (char) (Math.pow(dec[i], d)%N);
+        }
+        dekrip = String.valueOf(dec);
+        return dekrip;
+    }
 }
