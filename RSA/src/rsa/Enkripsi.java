@@ -57,27 +57,33 @@ public class Enkripsi {
     
     public String getEncrypt(String plain, int E, int N){
         String enkrip;
-        char[] en = plain.toCharArray();
-        for(int i=0; i<en.length;i++){
-            en[i] = (char) (Math.pow(en[i], E)%N);
+        ConvertStringToInt t = new ConvertStringToInt();
+        int[] text = t.ConvInt(plain);
+        System.out.println("jj");
+        for(int i=0; i<text.length;i++){
+            System.out.print(text[i]);
+            //System.out.println("E"+i+" "+text[i]);
+            text[i] = (int) (Math.pow(text[i], E)%N);
+            System.out.println("e"+i+" "+text[i]);
         }
-        enkrip = String.valueOf(en);
+        enkrip = t.ConvString(text);
+        
         return enkrip;
     }
     
     public static void main(String[] args) {
         Enkripsi n = new Enkripsi();
-        int h =n.getO(7, 11);
+        int h =n.getO(7, 3);
         System.out.println("iniO"+h);
         int j= n.getE(h);
-        System.out.println("ini E"+j);
+        System.out.println("ini E "+j);
         int dodol = n.getD(h, j);
-        System.out.println("iniD" + dodol);
-        String hm= n.getEncrypt("ivena", j, n.getN(7, 11));
-        System.out.println("ini enn "+hm);
+        System.out.println("ini D " + dodol);
+        String hm= n.getEncrypt("ivena cindy", j, n.getN(7,3));
+        System.out.println("HASIL ENCRYPT: "+hm);
         
         Dekripsi m = new Dekripsi();
-        String hmm = m.getDecrypt(hm, dodol, m.getN(7, 11));
-        System.out.println("ini decc "+hmm);
+        String hmm = m.getDecrypt(hm, dodol, m.getN(7,3));
+        System.out.println("HASIL DECRYPT: "+hmm);
     }
 }

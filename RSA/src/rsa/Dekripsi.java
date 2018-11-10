@@ -19,11 +19,17 @@ public class Dekripsi {
     
     public String getDecrypt(String enkrip, int d, int N){
         String dekrip;
-        char[] dec = enkrip.toCharArray();
-        for(int i=0; i<dec.length; i++){
-            dec[i] = (char) (Math.pow(dec[i], d)%N);
+        ConvertStringToInt t = new ConvertStringToInt();
+        int[] text = t.ConvInt(enkrip);
+        for(int i=0; i<text.length; i++){
+            text[i] = (int) (Math.pow(text[i], d)%N);
+            text[i] -= 10;
+            if(text[i]<0){
+                text[i] +=93;
+            }
+            System.out.println("d"+i+" "+text[i]);
         }
-        dekrip = String.valueOf(dec);
+        dekrip = t.ConvString(text);
         return dekrip;
     }
 }
