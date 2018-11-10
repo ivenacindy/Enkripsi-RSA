@@ -23,10 +23,11 @@ public class Dekripsi {
         int[] text = t.ConvInt(enkrip);
         for(int i=0; i<text.length; i++){
             text[i] = (int) (Math.pow(text[i], d)%N);
-            text[i] -= 10;
-            if(text[i]<0){
-                text[i] +=93;
-            }
+            System.out.println("d"+i+" "+text[i]);
+//            text[i] -= 10;
+//            if(text[i]<0){
+//                text[i] +=93;
+//            }
             System.out.println("d"+i+" "+text[i]);
         }
         dekrip = t.ConvString(text);

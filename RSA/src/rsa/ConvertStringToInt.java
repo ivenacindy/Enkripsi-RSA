@@ -43,6 +43,10 @@ public class ConvertStringToInt {
         String t="";
         char[] T= new char[c.length];
         for(int i=0;i<c.length;i++){
+            c[i] -= 10;
+            if(c[i]<0){
+                c[i]+=93;
+            }
             T[i]= alpha[c[i]];
             t += T[i];
         }
@@ -51,7 +55,7 @@ public class ConvertStringToInt {
     
     public static void main(String[] args) {
         ConvertStringToInt kata = new ConvertStringToInt();
-        String nama = "ivena";
+        String nama = "ivena Z";
         int[] t = kata.ConvInt(nama);
         System.out.println("int "+Arrays.toString(t));
         String namaH = kata.ConvString(t);
