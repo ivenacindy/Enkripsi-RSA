@@ -16,21 +16,28 @@ public class Dekripsi {
     int getN(int p, int q){
         return p*q;
     }
-    
-    public String getDecrypt(String enkrip, int d, int N){
+   
+    public String getDecrypt(int[] cip,int d, int N){
         String dekrip;
         ConvertStringToInt t = new ConvertStringToInt();
-        int[] text = t.ConvInt(enkrip);
-        for(int i=0; i<text.length; i++){
-            text[i] = (int) (Math.pow(text[i], d)%N);
-            System.out.println("d"+i+" "+text[i]);
-//            text[i] -= 10;
-//            if(text[i]<0){
-//                text[i] +=93;
-//            }
-            System.out.println("d"+i+" "+text[i]);
+        System.out.println("cip " + cip[4]);
+        for(int i=0; i<cip.length; i++){
+            System.out.println("d"+i+" "+cip[i]);
+            int bag = (int) Math.pow(cip[i], d);
+            System.out.println("Bagi "+bag);
+            cip[i] = (int) (Math.pow(cip[i], d)%N);
+            
+            System.out.println("d"+i+" "+cip[i]);
         }
-        dekrip = t.ConvString(text);
+        dekrip = t.ConvString(cip);
         return dekrip;
+    }
+    
+    public static void main(String[] args) {
+        Dekripsi a = new Dekripsi();
+        int[] cip = {23,18,1,14,7};
+        int d = 11;
+        int N = 34;
+        System.out.println("HMM : "+ a.getDecrypt(cip,d ,N ));
     }
 }

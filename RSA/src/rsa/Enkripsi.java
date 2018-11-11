@@ -39,7 +39,7 @@ public class Enkripsi {
         while(O % e == 0){
             do {
                 e = rand.nextInt(O) - 1;
-                System.out.println(e);
+//                System.out.println(e);
             }while(!isPrime(e));
         }
         return e;
@@ -55,35 +55,50 @@ public class Enkripsi {
         return d;
     }
     
+    
+    public static void Cipher (int[] x ){
+        for (int i = 0; i < x.length; i++) {
+            System.out.println("INI : "+x[i]);
+        }
+    }
+    
     public String getEncrypt(String plain, int E, int N){
-        String enkrip;
+        String enkrip = "";
+        int i =0;
         ConvertStringToInt t = new ConvertStringToInt();
         int[] text = t.ConvInt(plain);
-        System.out.println("jj");
-        for(int i=0; i<text.length;i++){
+//        System.out.println("jj");
+        for( i=0; i<text.length;i++){
             System.out.print(text[i]);
-            //System.out.println("E"+i+" "+text[i]);
+//            System.out.println("E"+i+" "+text[i]);
+//            System.out.println("E : "+ Math.pow(text[i], E) );
+            int bag = (int) Math.pow(text[i], E);
+            System.out.println("Bagi "+bag%N);
             text[i] = (int) (Math.pow(text[i], E)%N);
+            enkrip += text[i]; 
             System.out.println("e"+i+" "+text[i]);
         }
+        Enkripsi.Cipher(text);
         enkrip = t.ConvString(text);
-        
         return enkrip;
     }
     
     public static void main(String[] args) {
         Enkripsi n = new Enkripsi();
-        int h =n.getO(7, 3);
+        int p=2, q = 11;
+        int h =n.getO(p, q);
+        System.out.println(n.getN(p, q));
         System.out.println("iniO"+h);
         int j= n.getE(h);
         System.out.println("ini E "+j);
         int dodol = n.getD(h, j);
         System.out.println("ini D " + dodol);
-        String hm= n.getEncrypt("ivena cindy", j, n.getN(7,3));
-        System.out.println("HASIL ENCRYPT: "+hm);
-        
-        Dekripsi m = new Dekripsi();
-        String hmm = m.getDecrypt(hm, dodol, m.getN(7,3));
-        System.out.println("HASIL DECRYPT: "+hmm);
+        String hm= n.getEncrypt("ivena", j, n.getN(p, q));
+        System.out.println("HASIL ENCRYPT: "+ hm);
+//        
+//        Dekripsi m = new Dekripsi();
+//        String hmm = m.getDecrypt(text, dodol, m.getN(p, q));
+//        System.out.println("HASIL DECRYPT: "+hmm);
+//    }
     }
 }
